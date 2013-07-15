@@ -19,7 +19,8 @@ to-do:
 """
 from datetime import datetime
 
-def main(echo = 'echo', verbose = 0, outfile = None, t = None):
+def main(echo = 'echo', verbose = 0, outfile = None, t = None,
+        multi_word_argument = False):
     """Do something interesting with the arguments."""
     if t: 
         timestamp = datetime.utcnow()
@@ -36,6 +37,8 @@ def main(echo = 'echo', verbose = 0, outfile = None, t = None):
         outfile.close()
     except:
         print rstr
+    if multi_word_argument:
+        print "multi-word argument:", multi_word_argument
     
 
 if __name__ == "__main__":
@@ -53,6 +56,8 @@ if __name__ == "__main__":
         help='display verbose output')
     parser.add_argument('-o', '--outfile', metavar='filename', 
         type=argparse.FileType('wt'), help='output file')
+    parser.add_argument('-m','--multi-word-argument',
+        type=str, help='argument named with multiple words')
     # add options with prefixes
     parser.add_argument('-t', action="store_false", default=None,
         help='do not print timestamp')
